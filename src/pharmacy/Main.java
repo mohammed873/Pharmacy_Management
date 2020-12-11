@@ -1,12 +1,11 @@
 package pharmacy;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Drug drug = new Drug(0, null, null, 0);
+		Drug drug = new Drug();
 		Pharmacist pharmacist = new Pharmacist();
 		Customer customer = new Customer();
 		Scanner scanner = new Scanner(System.in);

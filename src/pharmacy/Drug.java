@@ -9,12 +9,18 @@ public class Drug {
 	private String description;
 	private double price;
 
+	//Constructor
 	public Drug(int id, String name, String description, double price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
+	}
+	
+	//Empty Constructor
+	public Drug() {
+		
 	}
 	
 	public int getId() {
@@ -43,15 +49,114 @@ public class Drug {
 	}
 	
 	
+
+    @Override
+	public String toString() {
+		return "Drug [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + "]";
+	}
+
+
+	//using scan
+	Scanner scanner = new Scanner(System.in);
+
+	//creating an array_list for drug
+	ArrayList<String> drugList = new ArrayList<>();
+	int Id = 1;
+
+
+	//Adding new drug
+	public void drugAdd() {
+		
+		this.setId(Id);
+		
+		//Checking if drug name is longer than 6 char
+		System.out.println("enter drug name");
+		String name = scanner.next();
+		if(name.length() > 6) {
+			this.setName(name);
+		}else {
+			System.out.println("name is too short");
+			System.exit(0);
+		}
+		
+		//Checking if drug description is longer than 15 char
+		System.out.println("enter drug description");
+		String description = scanner.next();
+		if(description.length() > 15) {
+			this.setDescription(description);
+		}else {
+			System.out.println("name is too short (15 char needed)");
+			System.exit(0);
+		}
+		
+		
+		System.out.println("enter drug price");
+		double price = scanner.nextDouble();
+		this.setPrice(price);
+		
+		drugList.add(this.toString());
+		
+		Id++;
+	}
+
+	//Displaying all drugs
+	public void drugShow() {
+		for(String drug: drugList) {
+			System.out.println(drug.toString());
+		}
+	}
+
+	//Modifying a drug
+	public void drugModify() {
+		
+		System.out.println("enter the drug id to modify ?");
+		int modifyDrug = scanner.nextInt();
+		
+		this.setId(modifyDrug);
+		
+		modifyDrug = modifyDrug - 1;
+		
+		System.out.println("enter drug name");
+		String name = scanner.next();
+		this.setName(name);
+		
+		System.out.println("enter drug description");
+		String description = scanner.next();
+		this.setDescription(description);
+		
+		System.out.println("enter drug price");
+		double price = scanner.nextDouble();
+		this.setPrice(price);
+		
+		drugList.set(modifyDrug, this.toString());
+	}
+
+	//Deleting a drug
+	public void drugDelete() {
+		
+		System.out.println("enter the drug id to delete ?");
+		int deleteDrug = scanner.nextInt();
+		
+        this.setId(deleteDrug);
+        deleteDrug = deleteDrug - 1;
+        
+        drugList.remove(deleteDrug);
+	}
+
+	//Searching for drug
+	public void drugSearch() {
+		System.out.println("enter the drug id to search for ?");
+		int searchDrug = scanner.nextInt();
+		
+		this.setId(searchDrug);
+		searchDrug = searchDrug - 1;
+		
+		System.out.println(drugList.get(searchDrug));
+	}	
+	
+	
 public void drugDetails() {
-		
 		int input;
-		Scanner scanner = new Scanner(System.in);
-		
-		//creating an array_list for drugs
-		ArrayList<Object> drugList = new ArrayList<>();
-		
-		int id = 1;
 		
 		do {
 			System.out.println("1 - Add new Drag");
@@ -62,98 +167,26 @@ public void drugDetails() {
 			System.out.println("6 - Exit");
 			
 			input = scanner.nextInt();
-			Drug drug = new Drug(id, description, description, price);
-			
-			//Adding drugs to the array_list
-			if(input == 1) {
-				drug.setId(id);
-				
-				System.out.println("enter drug name");
-				String name = scanner.next();
-				drug.setName(name);
-				
-				System.out.println("enter drug description");
-				String description = scanner.next();
-				drug.setDescription(description);
-				
-				System.out.println("enter drug price");
-				double price = scanner.nextDouble();
-				drug.setPrice(price);
-				
-				drugList.add("------------ Drug list --------------------- \n" +
-					"drug id :" + drug.getId() + "\n" +
-					"drug name :" + drug.getName() + "\n" +
-					"drug description :" + drug.getDescription() + "\n" +
-					"drug price :" + drug.getPrice()
-						);
-				
-				id++;
-			}
-			
-			//Displaying all drugs in the list
-			if (input == 2) {
-				for(Object object: drugList) {
-					System.out.println(object);
-				}
-			}
-			
-			//Modifying a drug
-			if (input == 3) {
-				System.out.println("enter the drug id to modify ?");
-				int modifyDrug = scanner.nextInt();
-				
-				drug.setId(modifyDrug);
-				
-				modifyDrug = modifyDrug - 1;
-				
-				System.out.println("enter drug name");
-				String name = scanner.next();
-				drug.setName(name);
-				
-				System.out.println("enter drug description");
-				String description = scanner.next();
-				drug.setDescription(description);
-				
-				System.out.println("enter drug price");
-				double price = scanner.nextDouble();
-				drug.setPrice(price);
-				
-				drugList.set(modifyDrug ,"------------ Drug list --------------------- \n" +
-					"drug id :" + drug.getId() + "\n" +
-					"drug name :" + drug.getName() + "\n" +
-					"drug description :" + drug.getDescription() + "\n" +
-					"drug price :" + drug.getPrice() + "\n"
-						);
-				
-			}
-			
-			//Deleting a drug
-			if (input == 4) {
-				System.out.println("enter the drug id to delete ?");
-				int deleteDrug = scanner.nextInt();
-				
-                drug.setId(deleteDrug);
-                deleteDrug = deleteDrug - 1;
-                
-                drugList.remove(deleteDrug
-    						);
-                
-			}
-			
-			//Searching for a drug
-			if (input == 5) {
-				System.out.println("enter the drug id to search for ?");
-				int searchDrug = scanner.nextInt();
-				
-				drug.setId(searchDrug);
-				searchDrug = searchDrug - 1;
-				
-				System.out.println(drugList.get(searchDrug));
-			}
-			
-			//Return to the main process panel
-			if(input == 6) {
+
+			switch(input){
+			case 1 : 
+				drugAdd();
+				break;
+			case 2 : 
+				drugShow();
+				break;
+			case 3 : 
+				drugModify();
+				break;	
+			case 4 : 
+				drugDelete();
+				break;
+			case 5:
+				drugSearch();
+				break;
+			case 6:
 				Main.main(null);
+				break;
 			}
 			
 		}while(input != 6);

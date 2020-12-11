@@ -7,9 +7,21 @@ public class Person {
 	private String email;
 
 	
+	//Contractor
+	public Person(int id, String name, int phoneNumber, String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.email = email;
+	}
 	
-	
-	
+	// Empty Contractor
+	public Person() {
+		
+	}
+
+
 	public int getID() {
 		return id;
 	}
@@ -34,5 +46,9 @@ public class Person {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-}
 
+	@Override
+	public String toString() {
+		return "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + "";
+	}
+}

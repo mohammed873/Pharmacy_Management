@@ -5,17 +5,122 @@ import java.util.Scanner;
 
 public class Pharmacist extends Person {
 
+//Contractor
+public Pharmacist() {
+		super();
+	}
+
+Scanner scanner = new Scanner(System.in);
+
+//creating an array_list for pharmatists
+ArrayList<String> pharmacyList = new ArrayList<>();
+int id = 1;
+
+
+//Adding new pharmacist
+public void pharmacyAdd() {
+	this.setID(id);
+
+	//Checking if name char is longer than 6 char
+	System.out.println("enter Pharmacist name");
+	String name = scanner.next();
+	if(name.length() > 6) {
+		this.setName(name);
+	}else {
+		System.out.println("name is too short");
+		System.exit(0);
+	}
+	
+	//validating Email
+	final String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+	System.out.println("enter Pharmacist email");
+	String email = scanner.next();
+	if(email.matches(EMAIL_VERIFICATION)) {
+		this.setEmail(email);
+	}else {
+		System.out.println("email format is not correct");
+		System.exit(0);
+	}
+	
+	
+	System.out.println("enter Pharmacist phone number");
+	int phoneNumber = scanner.nextInt();
+	this.setPhoneNumber(phoneNumber);
+
+	pharmacyList.add(this.toString());
+	
+	id++;
+}
+
+//Displaying all pharmatists
+public void pharmacyShow() {
+	for(String pharmacist1: pharmacyList) {
+		System.out.println(pharmacist1.toString());
+	}
+}
+
+//Modifying a pharmatists
+public void pharmacyModify() {
+	System.out.println("enter the Pharmacist id to modify ?");
+	int modifyPharmacist = scanner.nextInt();
+	
+	this.setID( modifyPharmacist);
+	
+	 modifyPharmacist =  modifyPharmacist - 1;
+	
+	//Checking if name char is longer than 6 char
+		System.out.println("enter Pharmacist name");
+		String name = scanner.next();
+		if(name.length() > 6) {
+			this.setName(name);
+		}else {
+			System.out.println("name is too short");
+			System.exit(0);
+		}
+	
+	//validating Email
+		final String EMAIL_VERIFICATION = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+		System.out.println("enter Pharmacist email");
+		String email = scanner.next();
+		if(email.matches(EMAIL_VERIFICATION)) {
+			this.setEmail(email);
+		}else {
+			System.out.println("email format is not correct");
+			System.exit(0);
+		}
+		
+	System.out.println("enter Pharmacist phone number");
+	int phoneNumber = scanner.nextInt();
+	this.setPhoneNumber(phoneNumber);
+	
+	pharmacyList.set(modifyPharmacist, this.toString());
+}
+
+//Deleting a pharmatists
+public void pharmacyDelete() {
+	System.out.println("enter the Pharmacist id to delete ?");
+	int deletePharmacist = scanner.nextInt();
+	
+	this.setID(deletePharmacist);
+    deletePharmacist = deletePharmacist - 1;
+    
+    pharmacyList.remove(deletePharmacist);
+}
+
+//Searching for pharmatists
+public void pharmacySearch() {
+	System.out.println("enter the drug id to search for ?");
+	int searchPharmacist = scanner.nextInt();
+	
+	this.setID(searchPharmacist);
+	searchPharmacist = searchPharmacist - 1;
+	
+	System.out.println(pharmacyList.get(searchPharmacist));
+}
+
 public void pharmacyDetails() {
 		
 		int input;
-		Scanner scanner = new Scanner(System.in);
-		
-		//creating an array_list for pharmatists
-		ArrayList<Object> pharmacyList = new ArrayList<>();
-		
-		Pharmacist pharmacist = new Pharmacist();
-		
-		int id = 1;
 		
 		do {
 			System.out.println("1 - Add new Pharmacist");
@@ -27,98 +132,26 @@ public void pharmacyDetails() {
 			
 			input = scanner.nextInt();
 			
-			//Adding new pharmatists
-			if(input == 1) {
-		
-				pharmacist.setID(id);
-				
-				System.out.println("enter Pharmacist name");
-				String name = scanner.next();
-				pharmacist.setName(name);
-				
-				System.out.println("enter Pharmacist email");
-				String email = scanner.next();
-				pharmacist.setEmail(email);
-				
-				System.out.println("enter Pharmacist phone number");
-				int phoneNumber = scanner.nextInt();
-				pharmacist.setPhoneNumber(phoneNumber);
-				
-				pharmacyList.add("------------ Pharmacists list --------------------- \n" +
-					"Pharmacist id :" + pharmacist.getID() + "\n" +
-					"Pharmacist name :" + pharmacist.getName() + "\n" +
-					"Pharmacist Email :" + pharmacist.getEmail() + "\n" +
-					"Pharmacist Phone Number :" + pharmacist.getPhoneNumber()
-						);
-				
-				id++;
-			}
-			
-			//Displaying all pharmatists
-			if (input == 2) {
-				for(Object object: pharmacyList) {
-					System.out.println(object);
-				}
-			}
-			
-			//Modifying a pharmatists
-			if (input == 3) {
-				System.out.println("enter the Pharmacist id to modify ?");
-				int modifyPharmacist = scanner.nextInt();
-				
-				pharmacist.setID( modifyPharmacist);
-				
-				 modifyPharmacist =  modifyPharmacist - 1;
-				
-				System.out.println("enter Pharmacist name");
-				String name = scanner.next();
-				pharmacist.setName(name);
-				
-				System.out.println("enter Pharmacist email");
-				String email = scanner.next();
-				pharmacist.setEmail(email);
-				
-				System.out.println("enter Pharmacist phone number");
-				int phoneNumber = scanner.nextInt();
-				pharmacist.setPhoneNumber(phoneNumber);
-				
-				pharmacyList.set(modifyPharmacist ,"------------ Pharmacists list --------------------- \n" +
-					"Pharmacist id :" + pharmacist.getID() + "\n" +
-					"Pharmacist name :" + pharmacist.getName() + "\n" +
-					"Pharmacist email :" + pharmacist.getEmail() + "\n" +
-					"Pharmacist phone number :" + pharmacist.getPhoneNumber() + "\n"
-						);
-				
-			}
-			
-			//Deleting a pharmatists
-			if (input == 4) {
-				System.out.println("enter the Pharmacist id to delete ?");
-				int deletePharmacist = scanner.nextInt();
-				
-				pharmacist.setID(deletePharmacist);
-                deletePharmacist = deletePharmacist - 1;
-                
-                pharmacyList.remove(deletePharmacist);
-                
-			}
-			
-			//Searching for pharmatists
-			if (input == 5) {
-				System.out.println("enter the drug id to search for ?");
-				int searchPharmacist = scanner.nextInt();
-				
-				pharmacist.setID(searchPharmacist);
-				searchPharmacist = searchPharmacist - 1;
-				
-				System.out.println(pharmacyList.get(searchPharmacist));
-			}
-			
-			//Return to the main process panel
-			if(input == 6) {
+			switch(input){
+			case 1 : 
+				pharmacyAdd();
+				break;
+			case 2 : 
+				pharmacyShow();
+				break;
+			case 3 : 
+				pharmacyModify();
+				break;	
+			case 4 : 
+				pharmacyDelete();
+				break;
+			case 5:
+				pharmacySearch();
+				break;
+			case 6:
 				Main.main(null);
+				break;
 			}
-			
 		}while(input != 6);
 		
 		scanner.close();
